@@ -5,6 +5,8 @@
   home.packages = with pkgs; [
     fastfetch
     htop
+    nil
+    nixfmt
   ];
 
   programs.git = {

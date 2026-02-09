@@ -17,8 +17,6 @@ in
 
   home.packages = with pkgs; [
     unstable.antigravity
-    nil
-    nixfmt
     gnome-tweaks
     nodejs_24
     python315
