@@ -9,9 +9,12 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "Andrew";
+    settings = {
+      user.name = "Andrew";
+      user.email = "andrew@housermail.com";
+    };
   };
-  
+
   programs.vim.enable = true;
 
   home.stateVersion = "24.11";
