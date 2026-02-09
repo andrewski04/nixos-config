@@ -10,11 +10,6 @@ in
   programs.librewolf = {
     enable = true;
     package = unstable.librewolf;
-    policies = {
-      ExtensionSettings = {
-        default_area = "navbar";
-      };
-    };
     profiles.default = {
       isDefault = true;
       settings = {
@@ -30,12 +25,20 @@ in
       };
       search = {
         default = "google";
+        privateDefault = "google";
         force = true;
       };
       # Using NUR packages (via overlay defined in flake.nix)
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         proton-pass
       ];
+    };
+    policies = {
+      force = true;
+      DefaultDownloadDirectory = "\${home}/Downloads";
+      ExtensionSettings = {
+        default_area = "navbar";
+      };
     };
   };
 

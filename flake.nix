@@ -38,7 +38,23 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.extraSpecialArgs = { inherit inputs; };
-              # Point to the DESKTOP config
+              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
+            }
+          ];
+        };
+
+          #=== HOST 2: nixos-laptop ===
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/nixos-laptop
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
             }
           ];
