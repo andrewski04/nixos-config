@@ -4,7 +4,7 @@
   programs.ghostty = {
     enable = true;
     settings = {
-      background-opacity = 0.2;
+      cursor-style = "block";
     };
   };
 }
