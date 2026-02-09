@@ -22,6 +22,7 @@ in
     gnome-tweaks
     nodejs_24
     python315
+    chromium
   ];
 
   dconf.enable = true;
