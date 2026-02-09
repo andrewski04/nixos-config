@@ -12,6 +12,7 @@ in
     ./base.nix
     ../../features/vscode.nix # Add GUI tools
     ../../features/librewolf.nix
+    ../../features/ghostty.nix
   ];
 
   home.packages = with pkgs; [
@@ -19,6 +20,8 @@ in
     nil
     nixfmt
     gnome-tweaks
+    nodejs_24
+    python315
   ];
 
   dconf.enable = true;
@@ -33,9 +36,21 @@ in
     "org/gnome/shell" = {
       favorite-apps = [
         "librewolf.desktop"
-        "org.gnome.Console.desktop"
+        "ghostty.desktop"
         "code.desktop"
       ];
+    };
+
+    # keybinds
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Primary><Alt>t";
+      command = "ghostty";
+      name = "open-terminal";
     };
   };
 

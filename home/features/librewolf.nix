@@ -18,8 +18,8 @@ in
     profiles.default = {
       isDefault = true;
       settings = {
-        "webgl.disabled" = false;
-        "privacy.resistFingerprinting" = false;
+        "webgl.disabled" = true;
+        "privacy.resistFingerprinting" = true;
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
         "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;

@@ -18,12 +18,13 @@ in
       esbenp.prettier-vscode
     ];
 
-    # Settings (equivalent to settings.json)
+    # Settings.json
     profiles.default.userSettings = {
       "editor.formatOnSave" = true;
       "files.autoSave" = "onFocusChange";
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
+      "git.autofetch" = true;
       "nix.serverSettings" = {
         "nil" = {
           "formatting" = {
