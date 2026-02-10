@@ -11,6 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nur.url = "github:nix-community/NUR";
   };
 
@@ -21,6 +24,8 @@
       nixpkgs-unstable,
       home-manager,
       nur,
+      sops-nix,
+      authentik-nix,
       ...
     }@inputs:
     {
@@ -82,6 +87,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/hsrnet-nix
             home-manager.nixosModules.home-manager
             {

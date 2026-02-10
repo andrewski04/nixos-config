@@ -4,7 +4,7 @@
     enable = true;
     # The environmentFile needs to be on the target host!
     # Best use something like sops-nix or agenix to manage it
-    environmentFile = "/run/secrets/authentik/authentik-env";
+    environmentFile = config.sops.secrets.authenik_env.path;
     settings = {
       email = {
         host = "smtp.example.com";
