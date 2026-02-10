@@ -21,6 +21,7 @@ in
     nodejs_24
     python315
     chromium
+    mcp-nixos
   ];
 
   dconf.enable = true;

@@ -8,6 +8,7 @@
     git
     xdg-utils
     dnsutils
+    age
   ];
 
   programs.nix-ld.enable = true;

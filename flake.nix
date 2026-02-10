@@ -15,6 +15,11 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";
+
+    authentik-nix = {
+      url = "github:nix-community/authentik-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -87,6 +92,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
+            authentik-nix.nixosModules.default
             sops-nix.nixosModules.sops
             ./hosts/hsrnet-nix
             home-manager.nixosModules.home-manager

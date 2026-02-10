@@ -11,14 +11,13 @@
     ./hardware-configuration.nix
     ../../modules/core
     ../../modules/core/sshd.nix
-    ../../modules/services/caddy.nix
-    #../../modules/services/authentik.nix
+    ../../modules/services/nginx.nix
+    ../../modules/services/authentik.nix
   ];
-
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  sops.secrets.authenik_env = { };
+  sops.secrets."authenik_env" = { };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -45,6 +44,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+    sops
   ];
 
   networking.firewall.enable = true;

@@ -1,18 +1,16 @@
 { config, pkgs, ... }:
 {
   services.authentik = {
-    enable = true;
-    # The environmentFile needs to be on the target host!
-    # Best use something like sops-nix or agenix to manage it
+    enable = false;
     environmentFile = config.sops.secrets.authenik_env.path;
     settings = {
       email = {
-        host = "smtp.example.com";
+        host = "smtp.hsr.wtf";
         port = 587;
-        username = "authentik@example.com";
+        username = "authentik@hsr.wtf";
         use_tls = true;
         use_ssl = false;
-        from = "authentik@example.com";
+        from = "authentik@hsr.wtf";
       };
       disable_startup_analytics = true;
       avatars = "initials";
