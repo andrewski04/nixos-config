@@ -1,0 +1,16 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "git.autofetch": true,
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": [
+                    "nixfmt"
+                ]
+            }
+        }
+    }
+}

@@ -60,19 +60,19 @@
           ];
         };
 
-        #=== HOST 3: hsrnet-nix ===
-       hsrnet-nix = nixpkgs.lib.nixosSystem {
+        #=== HOST 3: nixos-desktop ===
+         nixos-desktop = nixpkgs.lib.nixosSystem {
          system = "x86_64-linux";
          specialArgs = { inherit inputs; };
          modules = [
-         ./hosts/hsrnet-nix
+         ./hosts/nixos-desktop
          home-manager.nixosModules.home-manager
          {
            home-manager.useGlobalPkgs = true;
            home-manager.useUserPackages = true;
            home-manager.backupFileExtension = "bak";
            home-manager.extraSpecialArgs = { inherit inputs; };
-           home-manager.users.andrew = import ./home/users/andrew/base.nix;
+           home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
          }
          ];
        };

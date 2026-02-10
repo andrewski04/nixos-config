@@ -35,8 +35,9 @@ in
     "org/gnome/shell" = {
       favorite-apps = [
         "librewolf.desktop"
-        "ghostty.desktop"
+        "com.mitchellh.ghostty.desktop"
         "code.desktop"
+        "antigravity.desktop"
       ];
     };
 

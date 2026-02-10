@@ -22,6 +22,8 @@ in
         "general.useragent.compatMode.firefox" = true;
         "extensions.autoDisableScopes" = 0;
         "extensions.enabledScopes" = 15;
+        "browser.policies.runOncePerModification.setDefaultSearchEngine" = "Google";
+        "browser.policies.runOncePerModification.removeSearchEngines" = [ "" ];
       };
       search = {
         default = "google";
