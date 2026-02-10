@@ -17,6 +17,8 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWAbnpdCyp/WuUgcU3MEOXMiOIPXUxM9qgmQjj923cV andrew@nixos-laptop"
     # hsrnet-nix
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFthL1dW729BToFlRLilTBGV0s5m5F51RF8NDmeBc1+J andrew@hsrnet-nix"
+    # nixos-desktop
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL08O7qL2JkYUC3yIKqv39alqfOgUIId0qKuuuWvv/Va andrew@nixos-desktop"
   ];
 
 }
