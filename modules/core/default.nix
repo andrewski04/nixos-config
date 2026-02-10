@@ -18,6 +18,10 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
+  networking.extraHosts = ''
+    45.79.202.195 hsrnet-nix
+  '';
+
   # Locale & Time
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
