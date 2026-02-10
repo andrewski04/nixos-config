@@ -44,7 +44,7 @@ in
     };
   };
 
-  # Set default app associations here too if you like
+  xdg.mime.enable = true;
   xdg.mimeApps.defaultApplications = {
     "text/html" = "librewolf.desktop";
     "x-scheme-handler/http" = "librewolf.desktop";
