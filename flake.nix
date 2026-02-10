@@ -12,6 +12,11 @@
     };
 
     nur.url = "github:nix-community/NUR";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,6 +26,7 @@
       nixpkgs-unstable,
       home-manager,
       nur,
+      sops-nix,
       ...
     }@inputs:
     {

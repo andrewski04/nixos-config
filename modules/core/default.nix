@@ -7,6 +7,7 @@
     fastfetch
     git
     xdg-utils
+    dnsutils
   ];
 
   programs.nix-ld.enable = true;

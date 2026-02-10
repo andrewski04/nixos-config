@@ -16,6 +16,9 @@ in
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
       esbenp.prettier-vscode
+      ms-vscode-remote.remote-ssh
+      ms-vscode-remote.remote-ssh-edit
+      ms-vscode.remote-explorer
     ];
 
     # Settings.json
