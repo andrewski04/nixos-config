@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -13,16 +12,7 @@
     ../../modules/core
     ../../modules/core/sshd.nix
     ../../modules/services/caddy.nix
-    ../../modules/services/authentik.nix
-    inputs.sops-nix.nixosModules.sops
   ];
-
-  sops = {
-    defaultSopsFile = ../../secrets/authentik.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/andrew/.config/sops/age/keys.txt";
-    secrets.authentik-env = { };
-  };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
