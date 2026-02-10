@@ -9,10 +9,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/core
-    ../../modules/core/sshd.nix
-    ../../modules/services/nginx.nix
-    ../../modules/services/authentik.nix
   ];
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
@@ -30,20 +26,7 @@
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = true;
 
-  users.users.andrew = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      git
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
-    vim
-    wget
     sops
   ];
 

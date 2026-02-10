@@ -1,5 +1,5 @@
 {
-  description = "Andrewski'sNixOS Configuration";
+  description = "Andrewski's NixOS Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -33,76 +33,41 @@
       authentik-nix,
       ...
     }@inputs:
+    let
+      mkSystem = import ./lib/mkSystem.nix inputs;
+    in
     {
       nixosConfigurations = {
 
         #=== HOST 1: The Desktop VM ===
-        nixos-vm = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/nixos-vm
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
-            }
-          ];
+        nixos-vm = mkSystem {
+          hostname = "nixos-vm";
+          extraModules = [ ./modules/desktop/gnome.nix ];
         };
 
         #=== HOST 2: nixos-laptop ===
-        nixos-laptop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/nixos-laptop
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
-            }
-          ];
+        nixos-laptop = mkSystem {
+          hostname = "nixos-laptop";
+          extraModules = [ ./modules/desktop/gnome.nix ];
         };
 
         #=== HOST 3: nixos-desktop ===
-        nixos-desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/nixos-desktop
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
-            }
-          ];
+        nixos-desktop = mkSystem {
+          hostname = "nixos-desktop";
+          extraModules = [ ./modules/desktop/gnome.nix ];
         };
 
         #=== HOST 4: hsrnet-nix ===
-        hsrnet-nix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
+        hsrnet-nix = mkSystem {
+          hostname = "hsrnet-nix";
+          userConfig = ./home/users/andrew/base.nix;
+          extraModules = [
+            ./modules/core/sshd.nix
+            ./modules/services/nginx.nix
+            ./modules/services/authentik.nix
+            ./modules/services/opentofu.nix
             authentik-nix.nixosModules.default
             sops-nix.nixosModules.sops
-            ./hosts/hsrnet-nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.andrew = import ./home/users/andrew/base.nix;
-            }
           ];
         };
 

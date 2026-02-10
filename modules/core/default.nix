@@ -1,5 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [
+    ./user.nix
+  ];
+
+  nixpkgs.overlays = [
+    inputs.nur.overlays.default
+  ];
   # Common System Packages
   environment.systemPackages = with pkgs; [
     vim
@@ -9,6 +16,7 @@
     xdg-utils
     dnsutils
     age
+    uv
   ];
 
   programs.nix-ld.enable = true;
