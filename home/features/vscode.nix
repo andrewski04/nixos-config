@@ -20,6 +20,7 @@ in
 
     # Settings.json
     profiles.default.userSettings = {
+      "workbench.externalBrowser" = "librewolf";
       "editor.formatOnSave" = true;
       "files.autoSave" = "onFocusChange";
       "nix.enableLanguageServer" = true;
