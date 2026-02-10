@@ -43,7 +43,7 @@
           ];
         };
 
-          #=== HOST 2: nixos-laptop ===
+        #=== HOST 2: nixos-laptop ===
         nixos-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
@@ -55,29 +55,46 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.andrew = import ./home/users/andrew/base.nix;
+              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
             }
           ];
         };
 
         #=== HOST 3: nixos-desktop ===
-         nixos-desktop = nixpkgs.lib.nixosSystem {
-         system = "x86_64-linux";
-         specialArgs = { inherit inputs; };
-         modules = [
-         ./hosts/nixos-desktop
-         home-manager.nixosModules.home-manager
-         {
-           home-manager.useGlobalPkgs = true;
-           home-manager.useUserPackages = true;
-           home-manager.backupFileExtension = "bak";
-           home-manager.extraSpecialArgs = { inherit inputs; };
-           home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
-         }
-         ];
-       };
-      
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/nixos-desktop
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.andrew = import ./home/users/andrew/desktop.nix;
+            }
+          ];
+        };
+
+        #=== HOST 4: hsrnet-nix ===
+        hsrnet-nix = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/hsrnet-nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.andrew = import ./home/users/andrew/base.nix;
+            }
+          ];
+        };
+
       };
-   
+
     };
 }
