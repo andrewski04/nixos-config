@@ -21,6 +21,7 @@ in
     nodejs_24
     python315
     chromium
+    discord
   ];
 
   dconf.enable = true;

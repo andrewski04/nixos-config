@@ -7,6 +7,9 @@
     htop
     nil
     nixfmt
+    opentofu
+    sops
+    age
   ];
 
   programs.git = {
