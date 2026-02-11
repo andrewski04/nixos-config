@@ -28,62 +28,63 @@ data "authentik_certificate_key_pair" "default" {
 
 # Netbird Service Account
 resource "authentik_user" "netbird_sa" {
-  username         = "netbird"
-  name             = "netbird"
-  type             = "service_account"
-  groups           = [data.authentik_group.admins.id]
+  username = "netbird"
+  name     = "netbird"
+  type     = "service_account"
+  groups   = [data.authentik_group.admins.id]
 }
 
 # Netbird Service Account Token
 resource "authentik_token" "netbird_sa_token" {
-  identifier = "netbird-api-token"
-  user       = authentik_user.netbird_sa.id
-  intent     = "app_password"
-  expiring   = false
+  identifier   = "netbird-api-token"
+  user         = authentik_user.netbird_sa.id
+  intent       = "app_password"
+  expiring     = false
   retrieve_key = true
 }
 
 # Netbird Provider
 resource "authentik_provider_oauth2" "netbird" {
-  name               = "Netbird"
-  client_id          = "netbird"
-  client_secret      = "netbird-secret-placeholder-replaced-by-authentik-if-left-empty-but-we-want-random" 
+  name          = "Netbird"
+  client_id     = "netbird"
+  client_secret = "netbird-secret-placeholder-replaced-by-authentik"
 
   # Configuration parameters based on docs
-  client_type        = "public"
+  client_type = "public"
   allowed_redirect_uris = [
+
+    {
+      matching_mode = "regex"
+      url           = "https://netbird.${var.domain}/.*"
+    },
+    {
+      matching_mode = "strict"
+      url           = "https://netbird.${var.domain}/auth"
+    },
+    {
+      matching_mode = "strict"
+      url           = "https://netbird.${var.domain}/silent-auth"
+    },
     {
       matching_mode = "strict"
       url           = "http://localhost:53000"
-    },
-    {
-      matching_mode = "regex"
-      url           = "https://netbird.hsr.wtf/.*"
-    },
-    {
-      matching_mode = "strict"
-      url           = "https://netbird.hsr.wtf/auth"
-    },
-    {
-      matching_mode = "strict"
-      url           = "https://netbird.hsr.wtf/silent-auth"
     }
   ]
-  
-  property_mappings  = [
+
+  property_mappings = [
     data.authentik_property_mapping_provider_scope.scope_email.id,
     data.authentik_property_mapping_provider_scope.scope_openid.id,
     data.authentik_property_mapping_provider_scope.scope_profile.id
   ]
-  
+
   authorization_flow = data.authentik_flow.default-authorization-flow.id
-  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  invalidation_flow  = data.authentik_flow.default-provider-invalidation-flow.id
   signing_key        = data.authentik_certificate_key_pair.default.id
-  
+
   # Advanced settings from docs
-  access_code_validity = "minutes=10"
-  sub_mode             = "user_id"
-  include_claims_in_id_token = true 
+  access_code_validity       = "minutes=10"
+  sub_mode                   = "user_id"
+  include_claims_in_id_token = true
 }
 
 # Netbird Application
@@ -91,14 +92,15 @@ resource "authentik_application" "netbird" {
   name              = "Netbird"
   slug              = "netbird"
   protocol_provider = authentik_provider_oauth2.netbird.id
+  meta_launch_url   = "https://netbird.${var.domain}"
 }
 
 resource "local_file" "netbird_setup_env" {
-  filename = "/var/lib/netbird/setup.env"
+  filename        = "/var/lib/netbird/setup.env"
   file_permission = "0600" # Initial permission
-  content  = <<EOT
+  content         = <<EOT
 # Management variables
-NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT="https://sso.hsr.wtf/application/o/netbird/.well-known/openid-configuration"
+NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT="${var.authentik_api_url}/application/o/netbird/.well-known/openid-configuration"
 NETBIRD_USE_AUTH0=false
 NETBIRD_AUTH_CLIENT_ID="${authentik_provider_oauth2.netbird.client_id}"
 NETBIRD_AUTH_SUPPORTED_SCOPES="openid profile email offline_access api"
@@ -115,7 +117,7 @@ NETBIRD_AUTH_PKCE_DISABLE_PROMPT_LOGIN=true
 
 # Dashboard variables (standard OIDC params)
 AUTH_CLIENT_ID="${authentik_provider_oauth2.netbird.client_id}"
-AUTH_AUTHORITY="https://sso.hsr.wtf/application/o/netbird/"
+AUTH_AUTHORITY="${var.authentik_api_url}/application/o/netbird/"
 AUTH_AUDIENCE="${authentik_provider_oauth2.netbird.client_id}"
 EOT
 }
@@ -126,6 +128,6 @@ resource "null_resource" "fix_netbird_env_permissions" {
   }
 
   provisioner "local-exec" {
-    command = "chown netbird:netbird /var/lib/netbird/setup.env || true" 
+    command = "chown netbird:netbird /var/lib/netbird/setup.env || true"
   }
 }

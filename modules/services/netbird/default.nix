@@ -40,7 +40,8 @@ in
       enableNginx = true;
       domain = netbirdDomain;
       turnDomain = netbirdDomain;
-      singleAccountModeDomain = netbirdDomain;
+      disableSingleAccountMode = true;
+      disableAnonymousMetrics = true;
       oidcConfigEndpoint = "https://${ssoDomain}/application/o/netbird/.well-known/openid-configuration";
 
       settings = {
@@ -80,7 +81,6 @@ in
     };
   };
 
-  # Make the env available to the systemd service
   # Make the env available to the systemd service
   systemd.services.netbird-management = {
     serviceConfig.EnvironmentFile = "/var/lib/netbird/setup.env";
