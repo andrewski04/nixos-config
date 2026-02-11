@@ -1,26 +1,26 @@
-// disable default branding
-data "authentik_brand" "authentik-default" {
-  domain = "authentik-default"
+// get default user settings flow
+data "authentik_flow" "default-user-settings-flow" {
+  slug = "default-user-settings-flow"
 }
 
-import {
-  to = authentik_brand.authentik-default
-  id = data.authentik_brand.authentik-default.id
-}
-
-resource "authentik_brand" "authentik-default" {
-  default = false
-  domain = "authentik-default"
+// get default invalidation flow
+data "authentik_flow" "default-invalidation-flow" {
+  slug = "default-invalidation-flow"
 }
 
 // enable hsrnet branding
 resource "authentik_brand" "hsrnet" {
   domain = "hsr.wtf"
-  default = true
+  default = false
   branding_title = "HsrNet Auth"
   branding_logo  = "https://sso.hsr.wtf/media/hsrnet-logo.png"
   branding_favicon = "https://sso.hsr.wtf/media/hsrnet-ico.ico"
   flow_authentication = authentik_flow.welcome_flow.uuid
+  flow_invalidation   = data.authentik_flow.default-invalidation-flow.id
+  #flow_recovery       = data.authentik_flow.default-recovery-flow.id
+  #flow_unenrollment   = data.authentik_flow.default-unenrollment-flow.id
+  flow_user_settings  = data.authentik_flow.default-user-settings-flow.id
+  #flow_device_code    = data.authentik_flow.default-provider-authorization-device-code-flow.id
   branding_custom_css = <<EOT
     body {
       --ak-global--background-image: null !important;

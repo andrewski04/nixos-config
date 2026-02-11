@@ -2,7 +2,12 @@ keys:
   - &hsrnet_nix age189ex2x65fv6kezdwm7nhjp0mlp852qkqdpvsq052h225gh5desgqkjugkl
   - &host_ssh age19edv6g5j59a9a3jdwr8ek9xpj2dd98v88fmlugkvz0w2ye6hxd2qhw7xrx
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets/authentik.yaml$
+    key_groups:
+      - age:
+          - *hsrnet_nix
+          - *host_ssh
+  - path_regex: secrets/netbird.yaml$
     key_groups:
       - age:
           - *hsrnet_nix

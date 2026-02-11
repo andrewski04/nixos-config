@@ -63,9 +63,9 @@
           userConfig = ./home/users/andrew/base.nix;
           extraModules = [
             ./modules/core/sshd.nix
-            ./modules/services/nginx.nix
-            ./modules/services/authentik.nix
-            ./modules/services/opentofu.nix
+            ./modules/services/nginx
+            ./modules/services/authentik
+            ./modules/services/netbird
             authentik-nix.nixosModules.default
             sops-nix.nixosModules.sops
           ];
