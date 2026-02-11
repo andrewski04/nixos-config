@@ -1,0 +1,32 @@
+# Terraform generated files
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tflint.hcl
+.tflint.hcl.fmt
+
+# Crash log files
+crash.log
+
+# hclfmt and other editor/tool temporary files
+.terraform.lock.hcl.fmt
+
+# Sensitive data/variable files
+*.tfvars
+*.tfvars.json
+
+# Local override files (often used for development overrides)
+# Depending on your workflow, you might want to track a specific 
+# '.tfvars' file (e.g., 'production.tfvars') but ignore others.
+# Adjust as necessary.
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Other potential temporary files
+*.tfplan
