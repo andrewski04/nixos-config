@@ -21,6 +21,9 @@
     virtualHosts."sso.hsr.wtf" = {
       forceSSL = true;
       enableACME = true;
+      locations."/media/" = {
+        alias = "${../../media}/";
+      };
       locations."/" = {
         proxyPass = "https://authentik";
         extraConfig = ''
