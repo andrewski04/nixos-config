@@ -16,6 +16,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.useOSProber = true; 
 
   boot.initrd.luks.devices."luks-d078ae3c-7485-430f-bc81-e9c6d645086f".device =
     "/dev/disk/by-uuid/d078ae3c-7485-430f-bc81-e9c6d645086f";
@@ -24,7 +25,54 @@
   # nvidia
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
+  hardware.nvidia = { 
+    open = true;
+    powerManagement = true;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+  };
+
+    #nvidia suspend/resume fix
+    systemd = {
+    # Uncertain if this is still required or not.
+    services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+
+    services."gnome-suspend" = {
+      description = "suspend gnome shell";
+      before = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-suspend.service"
+        "nvidia-hibernate.service"
+      ];
+      wantedBy = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+      };
+    };
+    services."gnome-resume" = {
+      description = "resume gnome shell";
+      after = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-resume.service"
+      ];
+      wantedBy = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+      };
+    };
+  };
+
+
 
   system.stateVersion = "25.11";
 }
