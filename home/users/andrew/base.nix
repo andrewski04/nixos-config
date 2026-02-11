@@ -10,7 +10,6 @@
     opentofu
     sops
     age
-    discord
   ];
 
   programs.git = {
