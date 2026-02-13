@@ -5,6 +5,9 @@ let
     system = pkgs.system;
     config.allowUnfree = true;
   };
+  autostartPrograms = [
+    pkgs.netbird-ui
+  ];
 in
 {
   # configured
@@ -15,6 +18,22 @@ in
     ../../features/ghostty.nix
   ];
 
+  # gross autostart workaround
+  home.file = builtins.listToAttrs (
+    map (pkg: {
+      name = ".config/autostart/" + pkg.pname + ".desktop";
+      value =
+        if pkg ? desktopItem then
+          {
+            text = pkg.desktopItem.text;
+          }
+        else
+          {
+            source = (pkg + "/share/applications/" + pkg.pname + ".desktop");
+          };
+    }) autostartPrograms
+  );
+
   home.packages = with pkgs; [
     unstable.antigravity
     gnome-tweaks
@@ -23,6 +42,7 @@ in
     chromium
     discord
     steam
+    gnomeExtensions.appindicator
   ];
 
   dconf.enable = true;
@@ -53,6 +73,12 @@ in
       binding = "<Primary><Alt>t";
       command = "ghostty";
       name = "open-terminal";
+    };
+    "org/gnome/shell" = {
+      # `gnome-extensions list` for a list
+      enabled-extensions = [
+        "appindicatorsupport@rgcjonas.gmail.com"
+      ];
     };
   };
 
