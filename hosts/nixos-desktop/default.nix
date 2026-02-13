@@ -16,23 +16,34 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true; 
+  boot.loader.grub.useOSProber = true;
 
   boot.initrd.luks.devices."luks-d078ae3c-7485-430f-bc81-e9c6d645086f".device =
     "/dev/disk/by-uuid/d078ae3c-7485-430f-bc81-e9c6d645086f";
   networking.hostName = "nixos-desktop"; # Define your hostname.
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_drm"
+  ];
+
+  hardware.graphics.extraPackages = with pkgs; [ 
+    vulkan-loader 
+    vulkan-validation-layers 
+    vulkan-extension-layer 
+  ];
 
   # nvidia
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = { 
+  hardware.nvidia = {
     open = true;
     modesetting.enable = true;
     powerManagement.enable = true;
   };
 
-    #nvidia suspend/resume fix
-    systemd = {
+  #nvidia suspend/resume fix
+  systemd = {
     # Uncertain if this is still required or not.
     services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
 
@@ -50,7 +61,7 @@
       ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+        ExecStart = "${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell";
       };
     };
     services."gnome-resume" = {
@@ -66,12 +77,10 @@
       ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+        ExecStart = "${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell";
       };
     };
   };
-
-
 
   system.stateVersion = "25.11";
 }
