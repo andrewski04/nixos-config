@@ -55,15 +55,15 @@ resource "authentik_provider_oauth2" "netbird" {
 
     {
       matching_mode = "regex"
-      url           = "https://netbird.${var.domain}/.*"
+      url           = "https://vpn.${var.domain}/.*"
     },
     {
       matching_mode = "strict"
-      url           = "https://netbird.${var.domain}/auth"
+      url           = "https://vpn.${var.domain}/auth"
     },
     {
       matching_mode = "strict"
-      url           = "https://netbird.${var.domain}/silent-auth"
+      url           = "https://vpn.${var.domain}/silent-auth"
     },
     {
       matching_mode = "strict"
@@ -92,7 +92,7 @@ resource "authentik_application" "netbird" {
   name              = "Netbird"
   slug              = "netbird"
   protocol_provider = authentik_provider_oauth2.netbird.id
-  meta_launch_url   = "https://netbird.${var.domain}"
+  meta_launch_url   = "https://vpn.${var.domain}"
 }
 
 resource "local_file" "netbird_setup_env" {

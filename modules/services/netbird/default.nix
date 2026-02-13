@@ -2,7 +2,7 @@
 
 let
   domain = "hsr.wtf";
-  netbirdDomain = "netbird.${domain}";
+  netbirdDomain = "vpn.${domain}";
   ssoDomain = "sso.${domain}";
   # clientId will be provided by setup.env at runtime
 
