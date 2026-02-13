@@ -22,6 +22,7 @@ in
     python315
     chromium
     discord
+    steam
   ];
 
   services.netbird.clients.wt0 = {
