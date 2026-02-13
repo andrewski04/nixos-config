@@ -47,3 +47,12 @@ resource "authentik_flow_stage_binding" "welcome_login" {
   stage  = data.authentik_stage.login.id
   order  = 100
 }
+
+# Device Code Flow
+resource "authentik_flow" "device_code" {
+  name           = "default-device-code-flow"
+  title          = "Device code flow"
+  slug           = "default-device-code-flow"
+  designation    = "stage_configuration"
+  authentication = "require_authenticated"
+}

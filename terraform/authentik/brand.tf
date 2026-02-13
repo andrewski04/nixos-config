@@ -24,8 +24,8 @@ resource "authentik_brand" "hsrnet" {
   flow_invalidation   = data.authentik_flow.default-invalidation-flow.id
   #flow_recovery       = data.authentik_flow.default-recovery-flow.id
   #flow_unenrollment   = data.authentik_flow.default-unenrollment-flow.id
-  flow_user_settings = data.authentik_flow.default-user-settings-flow.id
-  #flow_device_code    = data.authentik_flow.default-provider-authorization-device-code-flow.id
+  flow_user_settings  = data.authentik_flow.default-user-settings-flow.id
+  flow_device_code    = authentik_flow.device_code.uuid
   branding_custom_css = <<EOT
     body {
       --ak-global--background-image: null !important;

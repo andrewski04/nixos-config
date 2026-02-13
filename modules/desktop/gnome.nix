@@ -1,9 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   services.xserver = {
     enable = true;
     xkb.layout = "us";
   };
+
+  services.netbird.ui.enable = true;
 
   services.gnome.core-apps.enable = true;
   services.gnome.core-developer-tools.enable = true;

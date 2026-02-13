@@ -3,9 +3,6 @@
 let
   domain = "hsr.wtf";
   netbirdDomain = "vpn.${domain}";
-  ssoDomain = "sso.${domain}";
-  # clientId will be provided by setup.env at runtime
-
 in
 {
   services.netbird.server = {
@@ -30,9 +27,12 @@ in
       enableNginx = true;
       domain = netbirdDomain;
       settings = {
-        AUTH_AUTHORITY = "https://${ssoDomain}/application/o/netbird/";
-        # AUTH_CLIENT_ID and AUTH_AUDIENCE managed via EnvironmentFile
+        AUTH_AUTHORITY = "https://sso.hsr.wtf/application/o/netbird/";
+        AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
+        AUTH_AUDIENCE = "netbird";
+        AUTH_CLIENT_ID = "netbird";
       };
+
     };
 
     management = {
@@ -40,22 +40,40 @@ in
       enableNginx = true;
       domain = netbirdDomain;
       turnDomain = netbirdDomain;
-      disableSingleAccountMode = true;
+      disableSingleAccountMode = false;
+      singleAccountModeDomain = "${netbirdDomain}";
       disableAnonymousMetrics = true;
-      oidcConfigEndpoint = "https://${ssoDomain}/application/o/netbird/.well-known/openid-configuration";
+      oidcConfigEndpoint = "https://sso.hsr.wtf/application/o/netbird/.well-known/openid-configuration";
 
       settings = {
         Signal.URI = "${netbirdDomain}:443";
 
-        HttpConfig.AuthAudience = "netbird"; # Placeholder, overridden by ENV
-        IdpManagerConfig.ClientConfig.ClientID = "netbird"; # Placeholder
-        DeviceAuthorizationFlow.ProviderConfig = {
-          Audience = "netbird"; # Placeholder
-          ClientID = "netbird"; # Placeholder
+        HttpConfig = {
+          AuthAudience = "netbird";
+          AuthUserIDClaim = "sub";
         };
+
+        IdpManagerConfig = {
+          ManagerType = "authentik";
+          ClientConfig = {
+            Issuer = "https://sso.hsr.wtf/application/o/netbird/";
+            ClientID = "netbird";
+            TokenEndpoint = "https://sso.hsr.wtf/application/o/token/";
+            ClientSecret = "";
+          };
+          ExtraConfig = {
+            Password._secret = config.sops.secrets."netbird/authentik_password".path;
+            Username = "Netbird";
+          };
+        };
+
         PKCEAuthorizationFlow.ProviderConfig = {
-          Audience = "netbird"; # Placeholder
-          ClientID = "netbird"; # Placeholder
+          Audience = "netbird";
+          ClientID = "netbird";
+          ClientSecret = "";
+          AuthorizationEndpoint = "https://sso.hsr.wtf/application/o/authorize/";
+          TokenEndpoint = "https://sso.hsr.wtf/application/o/token/";
+          RedirectURLs = [ "http://localhost:53000" ];
         };
 
         TURNConfig = {
@@ -79,19 +97,6 @@ in
         DataStoreEncryptionKey._secret = config.sops.secrets."netbird/data_store_encryption_key".path;
       };
     };
-  };
-
-  # Make the env available to the systemd service
-  systemd.services.netbird-management = {
-    serviceConfig.EnvironmentFile = "/var/lib/netbird/setup.env";
-    wants = [ "authentik-terraform-apply.service" ];
-    after = [ "authentik-terraform-apply.service" ];
-  };
-
-  systemd.services.netbird-dashboard = {
-    serviceConfig.EnvironmentFile = "/var/lib/netbird/setup.env";
-    wants = [ "authentik-terraform-apply.service" ];
-    after = [ "authentik-terraform-apply.service" ];
   };
 
   # Override ACME settings to get a cert

@@ -25,17 +25,6 @@ in
     steam
   ];
 
-  services.netbird.clients.wt0 = {
- login = {
-      enable = true;
-
-      # Path to a file containing the setup key for your peer
-      # NOTE: if your setup key is reusable, make sure it is not copied to the Nix store.
-      setupKeyFile = "/path/to/your/setup-key";
-    };
-
-  }
-
   dconf.enable = true;
   dconf.settings = {
     "org/gnome/desktop/interface" = {

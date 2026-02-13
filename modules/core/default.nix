@@ -2,6 +2,7 @@
 {
   imports = [
     ./user.nix
+    ./sops.nix
   ];
 
   nixpkgs.overlays = [

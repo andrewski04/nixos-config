@@ -10,8 +10,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  sops.defaultSopsFormat = "yaml";
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   sops.secrets = {
     authenik_env = {
@@ -34,6 +32,10 @@
     "netbird/relay_secret_container" = {
       sopsFile = ../../secrets/netbird.yaml;
       key = "relay_secret_container";
+    };
+    "netbird/authentik_password" = {
+      sopsFile = ../../secrets/netbird.yaml;
+      key = "netbird_authentik_password";
     };
   };
 

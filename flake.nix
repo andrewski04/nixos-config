@@ -67,7 +67,6 @@
             ./modules/services/authentik
             ./modules/services/netbird
             authentik-nix.nixosModules.default
-            sops-nix.nixosModules.sops
           ];
         };
 
