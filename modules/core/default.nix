@@ -7,6 +7,13 @@
 
   nixpkgs.overlays = [
     inputs.nur.overlays.default
+    (final: prev: {
+      netbird = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.netbird;
+      netbird-ui = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.netbird-ui;
+      netbird-dashboard = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.netbird-dashboard;
+      netbird-signal = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.netbird-signal;
+      netbird-management = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.netbird-management;
+    })
   ];
   # Common System Packages
   environment.systemPackages = with pkgs; [
