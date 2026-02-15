@@ -22,7 +22,7 @@ resource "authentik_brand" "hsrnet" {
   branding_favicon    = "${var.authentik_api_url}/media/hsrnet-ico.ico"
   flow_authentication = authentik_flow.welcome_flow.uuid
   flow_invalidation   = data.authentik_flow.default-invalidation-flow.id
-  #flow_recovery       = data.authentik_flow.default-recovery-flow.id
+  flow_recovery       = authentik_flow.recovery.uuid
   #flow_unenrollment   = data.authentik_flow.default-unenrollment-flow.id
   flow_user_settings  = data.authentik_flow.default-user-settings-flow.id
   flow_device_code    = authentik_flow.device_code.uuid
