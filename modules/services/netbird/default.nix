@@ -71,6 +71,7 @@ in
           Audience = "netbird";
           ClientID = "netbird";
           ClientSecret = "";
+          "DisablePromptLogin" = true;
           AuthorizationEndpoint = "https://sso.hsr.wtf/application/o/authorize/";
           TokenEndpoint = "https://sso.hsr.wtf/application/o/token/";
           RedirectURLs = [ "http://localhost:53000" ];
