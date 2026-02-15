@@ -10,6 +10,9 @@
     xkb.layout = "us";
   };
 
+  # Network Manager
+  networking.networkmanager.enable = true;
+
   services.netbird.enable = true;
   services.resolved.enable = true;
 

@@ -15,7 +15,11 @@
     authenik_env = {
       sopsFile = ../../secrets/authentik.yaml;
     };
-
+    "netbird/client_setup_key" = {
+      sopsFile = ../../secrets/netbird.yaml;
+      key = "client_setup_key";
+      #owner = "netbird-client";
+    };
     "netbird/turn_password" = {
       sopsFile = ../../secrets/netbird.yaml;
       key = "turn_password";
@@ -45,21 +49,22 @@
   networking.hostName = "hsrnet-nix"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
   networking.usePredictableInterfaceNames = false;
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = true;
+  networking.interfaces.eth0.tempAddress = "disabled";
+
+  networking.defaultGateway6 = {
+    address = "fe80::1";
+    interface = "eth0";
+  };
 
   environment.systemPackages = with pkgs; [
     sops
   ];
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [
-    #ssh
-    22
-  ];
-  #networking.firewall.allowedUDPPorts = [ ... ];
 
   system.stateVersion = "25.11"; # Did you read the comment?
 

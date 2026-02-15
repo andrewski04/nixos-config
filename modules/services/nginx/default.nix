@@ -6,6 +6,24 @@
     enable = true;
   };
 
+  services.nginx.streamConfig = ''
+    server {
+      # minecraft
+      listen 25565 udp;
+      proxy_pass 10.0.5.50:25565;
+    }
+    server {
+      # hytale
+      listen 5520 udp;
+      proxy_pass 10.0.5.200:5520;
+    }
+  '';
+
+  networking.firewall.allowedUDPPorts = [
+    25565
+    5520
+  ];
+
   networking.firewall.allowedTCPPorts = [
     80
     443

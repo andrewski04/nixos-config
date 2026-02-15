@@ -83,6 +83,7 @@ resource "authentik_provider_oauth2" "netbird" {
   ]
 
   authorization_flow = data.authentik_flow.default-authorization-flow.id
+  authentication_flow = authentik_flow.welcome_flow.uuid
   invalidation_flow  = data.authentik_flow.default-provider-invalidation-flow.id
   signing_key        = data.authentik_certificate_key_pair.default.id
 

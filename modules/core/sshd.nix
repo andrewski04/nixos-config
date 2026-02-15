@@ -1,6 +1,10 @@
 { ... }:
 
 {
+  networking.firewall.allowedTCPPorts = [
+    22
+  ];
+  services.fail2ban.enable = true;
   services.openssh = {
     enable = true;
     settings = {

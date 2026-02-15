@@ -66,6 +66,7 @@
             ./modules/services/nginx
             ./modules/services/authentik
             ./modules/services/netbird
+            ./modules/core/autoupdate.nix
             authentik-nix.nixosModules.default
           ];
         };

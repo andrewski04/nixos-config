@@ -1,10 +1,47 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   domain = "hsr.wtf";
   netbirdDomain = "vpn.${domain}";
 in
 {
+
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forwarding" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+  };
+  networking.firewall.checkReversePath = "loose";
+
+  # routing client
+  services.netbird = {
+    enable = true;
+    useRoutingFeatures = "both";
+    clients.default = {
+      name = "client";
+      openFirewall = true;
+      environment = {
+        NB_MANAGEMENT_URL = "https://${netbirdDomain}:443";
+      };
+      login = {
+        setupKeyFile = "/run/secrets/netbird/client_setup_key";
+        enable = true;
+        systemdDependencies = [
+          "sops-install-secrets.service"
+          "netbird-management.service"
+          "netbird-signal.service"
+          "netbird-dashboard.service"
+          "netbird-coturn.service"
+        ];
+      };
+    };
+  };
+
+  # server
   services.netbird.server = {
     enable = true;
     enableNginx = true;

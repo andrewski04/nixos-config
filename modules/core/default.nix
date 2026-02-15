@@ -56,6 +56,4 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Network Manager
-  networking.networkmanager.enable = true;
 }
