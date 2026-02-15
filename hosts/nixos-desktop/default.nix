@@ -27,19 +27,26 @@
     "nvidia_drm"
   ];
 
-  hardware.graphics.extraPackages = with pkgs; [ 
-    vulkan-loader 
-    vulkan-validation-layers 
-    vulkan-extension-layer 
-  ];
+  hardware.graphics = {
+    enable = true;
+
+    enable32Bit = true;
+
+    extraPackages = with pkgs; [
+      libva-vdpau-driver
+      intel-media-driver
+      libvdpau-va-gl
+      nvidia-vaapi-driver
+    ];
+  };
 
   # nvidia
-  hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     open = true;
     modesetting.enable = true;
     powerManagement.enable = true;
+    nvidiaSettings = true;
   };
 
   #nvidia suspend/resume fix
