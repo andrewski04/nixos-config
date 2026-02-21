@@ -41,7 +41,6 @@ in
     python315
     chromium
     discord
-    steam
     gnomeExtensions.appindicator
   ];
 

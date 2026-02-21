@@ -20,6 +20,11 @@
       url = "github:nix-community/authentik-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       nur,
       sops-nix,
       authentik-nix,
+      solaar,
       ...
     }@inputs:
     let
@@ -54,7 +60,10 @@
         #=== HOST 3: nixos-desktop ===
         desktop = mkSystem {
           hostname = "desktop";
-          extraModules = [ ./modules/desktop/gnome.nix ];
+          extraModules = [
+            ./modules/desktop/gnome.nix
+            solaar.nixosModules.default
+          ];
         };
 
         #=== HOST 4: hsrnet-nix ===

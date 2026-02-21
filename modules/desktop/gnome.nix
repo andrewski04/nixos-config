@@ -3,6 +3,11 @@
 
   environment.systemPackages = with pkgs; [
     netbird-ui
+    steam
+  ];
+
+  programs.steam.extraCompatPackages = with pkgs; [
+    proton-ge-bin
   ];
 
   services.xserver = {
