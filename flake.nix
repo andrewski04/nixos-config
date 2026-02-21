@@ -52,8 +52,8 @@
         };
 
         #=== HOST 3: nixos-desktop ===
-        nixos-desktop = mkSystem {
-          hostname = "nixos-desktop";
+        desktop = mkSystem {
+          hostname = "desktop";
           extraModules = [ ./modules/desktop/gnome.nix ];
         };
 
