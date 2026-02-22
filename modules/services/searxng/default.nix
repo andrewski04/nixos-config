@@ -55,16 +55,16 @@
         infinite_scroll = false;
         center_alignment = true;
         default_theme = "simple";
-        theme_args.simple_style = "auto";
-        search_on_category_select = false;
+        theme_args.simple_style = "dark";
+        search_on_category_select = true;
         hotkeys = "vim";
       };
 
       # Search engine settings
       search = {
-        safe_search = 2;
+        safe_search = 1;
         autocomplete_min = 2;
-        autocomplete = "duckduckgo";
+        autocomplete = "google";
         ban_time_on_fail = 5;
         max_ban_time_on_fail = 120;
       };
@@ -83,14 +83,14 @@
 
       # Search engines
       engines = lib.mapAttrsToList (name: value: { inherit name; } // value) {
-        "duckduckgo".disabled = true;
+        "duckduckgo".disabled = false;
         "brave".disabled = true;
         "bing".disabled = false;
         "mojeek".disabled = true;
         "mwmbl".disabled = false;
         "mwmbl".weight = 0.4;
         "qwant".disabled = true;
-        "crowdview".disabled = false;
+        "crowdview".disabled = true;
         "crowdview".weight = 0.5;
         "curlie".disabled = true;
         "ddg definitions".disabled = false;
@@ -145,6 +145,7 @@
         "youtube".disabled = false;
         "brave.news".disabled = true;
         "google news".disabled = true;
+        "startpage".disabled = true;
       };
 
       # Outgoing requests
@@ -177,11 +178,6 @@
 
   # Nginx configuration
   services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
     virtualHosts = {
       "search.hsr.wtf" = {
         forceSSL = true;

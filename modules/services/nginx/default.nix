@@ -4,6 +4,10 @@
   security.acme.acceptTerms = true;
   services.nginx = {
     enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
   };
 
   services.nginx.streamConfig = ''
@@ -20,8 +24,8 @@
   '';
 
   networking.firewall.allowedUDPPorts = [
-    25565
-    5520
+    #25565
+    #5520
   ];
 
   networking.firewall.allowedTCPPorts = [

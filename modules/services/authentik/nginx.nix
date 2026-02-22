@@ -24,11 +24,9 @@
       };
       locations."/" = {
         proxyPass = "https://authentik";
+        # proxy_set_header lines set in nginx global config
         extraConfig = ''
           proxy_http_version 1.1;
-          proxy_set_header X-Forwarded-Proto $scheme;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header Host $host;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection $connection_upgrade_keepalive;
 
