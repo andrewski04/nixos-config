@@ -42,6 +42,7 @@ in
     chromium
     discord
     gnomeExtensions.appindicator
+    guvcview
   ];
 
   dconf.enable = true;

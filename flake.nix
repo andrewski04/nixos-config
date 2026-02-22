@@ -22,7 +22,7 @@
     };
 
     solaar = {
-      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+      url = "github:Svenum/Solaar-Flake/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -62,6 +62,8 @@
           hostname = "desktop";
           extraModules = [
             ./modules/desktop/gnome.nix
+            ./modules/hardware/nvidia.nix
+            ./modules/hardware/logitech.nix
             solaar.nixosModules.default
           ];
         };
