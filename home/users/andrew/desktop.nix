@@ -41,8 +41,8 @@ in
     python315
     chromium
     discord
-    steam
     gnomeExtensions.appindicator
+    guvcview
   ];
 
   dconf.enable = true;
