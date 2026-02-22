@@ -67,6 +67,7 @@
             ./modules/services/authentik
             ./modules/services/netbird
             ./modules/core/autoupdate.nix
+            ./modules/services/searxng
             authentik-nix.nixosModules.default
           ];
         };

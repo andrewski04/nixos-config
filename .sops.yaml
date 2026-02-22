@@ -10,3 +10,7 @@ creation_rules:
     key_groups:
       - age:
           - *host_ssh
+  - path_regex: secrets/searxng.yaml$
+    key_groups:
+      - age:
+          - *host_ssh
