@@ -22,13 +22,21 @@ in
         "general.useragent.compatMode.firefox" = true;
         "extensions.autoDisableScopes" = 0;
         "extensions.enabledScopes" = 15;
-        "browser.policies.runOncePerModification.setDefaultSearchEngine" = "Google";
-        "browser.policies.runOncePerModification.removeSearchEngines" = [ "" ];
       };
       search = {
-        default = "google";
-        privateDefault = "google";
         force = true;
+        default = "HsrNet Search";
+        order = [
+          "HsrNet Search"
+          "DuckDuckGo"
+        ];
+        engines = {
+          "HsrNet Search" = {
+            urls = [ { template = "https://search.hsr.wtf/?q={searchTerms}"; } ];
+            iconUpdateURL = "https://search.hsr.wtf/favicon.ico";
+            definedAliases = [ "!hsr" ];
+          };
+        };
       };
       # Using NUR packages (via overlay defined in flake.nix)
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
