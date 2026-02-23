@@ -77,20 +77,20 @@
         secret_key = config.sops.secrets.searxng_secret.path;
         limiter = true;
         public_instance = true;
-        image_proxy = true;
+        image_proxy = false;
         method = "GET";
       };
 
       # Search engines
       engines = lib.mapAttrsToList (name: value: { inherit name; } // value) {
-        "duckduckgo".disabled = false;
+        "duckduckgo".disabled = true;
         "brave".disabled = true;
         "bing".disabled = false;
         "mojeek".disabled = true;
         "mwmbl".disabled = false;
         "mwmbl".weight = 0.4;
         "qwant".disabled = true;
-        "crowdview".disabled = true;
+        "crowdview".disabled = false;
         "crowdview".weight = 0.5;
         "curlie".disabled = true;
         "ddg definitions".disabled = false;
@@ -145,12 +145,11 @@
         "youtube".disabled = false;
         "brave.news".disabled = true;
         "google news".disabled = true;
-        "startpage".disabled = true;
       };
 
       # Outgoing requests
       outgoing = {
-        request_timeout = 5.0;
+        request_timeout = 2.0;
         max_request_timeout = 15.0;
         pool_connections = 100;
         pool_maxsize = 15;
