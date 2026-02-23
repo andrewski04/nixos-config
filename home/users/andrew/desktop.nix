@@ -40,9 +40,10 @@ in
     nodejs_24
     python315
     chromium
-    discord
+    vesktop
     gnomeExtensions.appindicator
     guvcview
+    pinta
   ];
 
   dconf.enable = true;
