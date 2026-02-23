@@ -23,6 +23,20 @@
 
   networking.hostName = "desktop";
 
+  # waydroid
+  virtualisation.waydroid.enable = true;
+  environment.systemPackages = [
+    pkgs.waydroid-helper
+    pkgs.wl-clipboard
+  ];
+  networking.firewall.trustedInterfaces = [ "waydroid0" ];
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv4.conf.all.forwarding" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
