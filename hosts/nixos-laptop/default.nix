@@ -19,6 +19,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   boot.initrd.luks.devices."luks-ce879d3b-85ba-437e-acd1-6cda02f2f75b".device =
     "/dev/disk/by-uuid/ce879d3b-85ba-437e-acd1-6cda02f2f75b";
   networking.hostName = "nixos-laptop"; # Define your hostname.

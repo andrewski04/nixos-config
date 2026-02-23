@@ -4,10 +4,25 @@
   environment.systemPackages = with pkgs; [
     netbird-ui
     steam
+    bottles
+    uxplay
   ];
 
   # needed for noisetorch to have microphone access
   # programs.noisetorch.enable = true;
+
+  # airplay mdns
+  services.avahi = {
+    nssmdns4 = true;
+    enable = true;
+    publish = {
+      enable = true;
+      userServices = true;
+      domain = true;
+    };
+  };
+  #airplay ports not found :(
+  networking.firewall.enable = false;
 
   programs.steam.extraCompatPackages = with pkgs; [
     proton-ge-bin
