@@ -41,6 +41,9 @@
       sopsFile = ../../secrets/netbird.yaml;
       key = "netbird_authentik_password";
     };
+    searxng_secret = {
+      sopsFile = ../../secrets/searxng.yaml;
+    };
   };
 
   # Use the GRUB 2 boot loader.
