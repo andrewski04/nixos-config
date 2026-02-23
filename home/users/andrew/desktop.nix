@@ -42,6 +42,7 @@ in
     chromium
     vesktop
     gnomeExtensions.appindicator
+    gnomeExtensions.uxplay-control
     guvcview
     pinta
   ];
@@ -79,6 +80,7 @@ in
       # `gnome-extensions list` for a list
       enabled-extensions = [
         "appindicatorsupport@rgcjonas.gmail.com"
+        "uxplay-control@xxanqw"
       ];
     };
   };
