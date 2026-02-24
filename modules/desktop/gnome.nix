@@ -6,12 +6,20 @@
     steam
     bottles
     uxplay
+    libimobiledevice
+    usbmuxd2
+  ];
+
+  systemd.services.bluetooth.serviceConfig.ExecStart = [
+    ""
+    "${pkgs.bluez}/libexec/bluetooth/bluetoothd --noplugin=input"
   ];
 
   # needed for noisetorch to have microphone access
   # programs.noisetorch.enable = true;
 
   # airplay mdns
+  services.usbmuxd.enable = true;
   services.avahi = {
     nssmdns4 = true;
     enable = true;
