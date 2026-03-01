@@ -45,6 +45,10 @@ in
     gnomeExtensions.uxplay-control
     guvcview
     pinta
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
   ];
 
   dconf.enable = true;
