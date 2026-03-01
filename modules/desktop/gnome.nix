@@ -10,27 +10,24 @@
     usbmuxd2
   ];
 
-  systemd.services.bluetooth.serviceConfig.ExecStart = [
-    ""
-    "${pkgs.bluez}/libexec/bluetooth/bluetoothd --noplugin=input"
-  ];
+  services.flatpak.enable = true;
 
   # needed for noisetorch to have microphone access
   # programs.noisetorch.enable = true;
 
   # airplay mdns
-  services.usbmuxd.enable = true;
-  services.avahi = {
-    nssmdns4 = true;
-    enable = true;
-    publish = {
-      enable = true;
-      userServices = true;
-      domain = true;
-    };
-  };
-  #airplay ports not found :(
-  networking.firewall.enable = false;
+  #services.usbmuxd.enable = true;
+  #services.avahi = {
+  #  nssmdns4 = true;
+  #  enable = true;
+  #  publish = {
+  #    enable = true;
+  #    userServices = true;
+  #    domain = true;
+  #  };
+  #};
+  ##airplay ports not found :(
+  #networking.firewall.enable = false;
 
   programs.steam.extraCompatPackages = with pkgs; [
     proton-ge-bin
