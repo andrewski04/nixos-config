@@ -64,7 +64,6 @@
           hostname = "desktop";
           extraModules = [
             ./modules/desktop/gnome.nix
-            ./modules/desktop/gnome-rdp.nix
             ./modules/hardware/nvidia.nix
             ./modules/hardware/logitech.nix
             ./modules/core/sshd.nix

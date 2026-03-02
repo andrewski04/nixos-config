@@ -42,7 +42,7 @@ in
     chromium
     vesktop
     gnomeExtensions.appindicator
-    gnomeExtensions.uxplay-control
+    #gnomeExtensions.uxplay-control
     guvcview
     pinta
     libreoffice-qt
