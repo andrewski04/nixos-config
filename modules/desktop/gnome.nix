@@ -8,7 +8,6 @@
     #uxplay # airplay
     libimobiledevice
     usbmuxd2
-    moonlight-qt
   ];
 
   services.flatpak.enable = true;
