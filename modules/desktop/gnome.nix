@@ -5,7 +5,7 @@
     netbird-ui
     steam
     bottles
-    uxplay
+    #uxplay # airplay
     libimobiledevice
     usbmuxd2
   ];
@@ -29,9 +29,15 @@
   ##airplay ports not found :(
   #networking.firewall.enable = false;
 
-  programs.steam.extraCompatPackages = with pkgs; [
-    proton-ge-bin
-  ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession.enable = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
+  };
+  hardware.steam-hardware.enable = true;
 
   services.xserver = {
     enable = true;
