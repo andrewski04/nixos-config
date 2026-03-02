@@ -40,7 +40,7 @@ in
     nodejs_24
     python315
     chromium
-    vesktop
+    discord
     gnomeExtensions.appindicator
     #gnomeExtensions.uxplay-control
     guvcview
