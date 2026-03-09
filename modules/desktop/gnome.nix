@@ -9,6 +9,7 @@
     libimobiledevice
     usbmuxd2
     moonlight-qt
+    jdk
   ];
 
   services.flatpak.enable = true;
