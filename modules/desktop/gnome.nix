@@ -10,6 +10,7 @@
     usbmuxd2
     moonlight-qt
     jdk
+    android-studio
   ];
 
   services.flatpak.enable = true;

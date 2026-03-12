@@ -49,7 +49,6 @@ in
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
-    godot
   ];
 
   dconf.enable = true;
