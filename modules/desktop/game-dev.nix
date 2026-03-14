@@ -15,5 +15,8 @@ in
 
   environment.systemPackages = with pkgs; [
     unstable.godot
+    unstable.aseprite
+    unstable.gemini-cli
+    github-desktop
   ];
 }
