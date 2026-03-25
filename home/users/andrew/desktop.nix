@@ -35,12 +35,13 @@ in
   );
 
   home.packages = with pkgs; [
-    unstable.antigravity
+    inputs.antigravity-nix.packages.${pkgs.system}.default
     gnome-tweaks
     nodejs_24
     python315
     chromium
-    discord
+    unstable.discord
+    #vesktop
     gnomeExtensions.appindicator
     #gnomeExtensions.uxplay-control
     guvcview
@@ -50,6 +51,7 @@ in
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
     obsidian
+    claude-code
   ];
 
   dconf.enable = true;

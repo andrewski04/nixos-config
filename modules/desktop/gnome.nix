@@ -1,4 +1,8 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 {
 
   environment.systemPackages = with pkgs; [
@@ -9,7 +13,7 @@
     usbmuxd2
     moonlight-qt
     jdk
-
+    protonup-qt
   ];
 
   services.flatpak.enable = true;
