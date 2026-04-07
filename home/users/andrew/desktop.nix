@@ -49,6 +49,7 @@ in
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
+    unstable.gemini-cli
   ];
 
   dconf.enable = true;

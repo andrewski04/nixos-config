@@ -9,7 +9,8 @@
     usbmuxd2
     moonlight-qt
     jdk
-
+    gcc
+    readest
   ];
 
   services.flatpak.enable = true;
