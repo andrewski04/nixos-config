@@ -25,6 +25,11 @@
       url = "github:Svenum/Solaar-Flake/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       sops-nix,
       authentik-nix,
       solaar,
+      antigravity-nix,
       ...
     }@inputs:
     let
@@ -69,6 +75,7 @@
             ./modules/hardware/nvidia.nix
             ./modules/hardware/logitech.nix
             ./modules/core/sshd.nix
+            ./modules/desktop/game-dev.nix
             solaar.nixosModules.default
           ];
         };

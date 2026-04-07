@@ -1,4 +1,8 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 {
 
   environment.systemPackages = with pkgs; [
@@ -11,6 +15,7 @@
     jdk
     gcc
     readest
+    protonup-qt
   ];
 
   services.flatpak.enable = true;
