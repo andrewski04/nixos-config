@@ -14,6 +14,8 @@
     moonlight-qt
     jdk
     protonup-qt
+    readest
+    gcc
   ];
 
   services.flatpak.enable = true;

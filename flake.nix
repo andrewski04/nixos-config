@@ -75,6 +75,7 @@
             ./modules/hardware/logitech.nix
             ./modules/core/sshd.nix
             ./modules/desktop/game-dev.nix
+            #./modules/services/ollama
             solaar.nixosModules.default
           ];
         };
