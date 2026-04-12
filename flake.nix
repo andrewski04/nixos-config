@@ -62,6 +62,7 @@
           hostname = "nixos-laptop";
           extraModules = [
             ./modules/desktop/gnome.nix
+            ./modules/desktop/virtualmachine.nix
           ];
         };
 

@@ -13,6 +13,8 @@
     usbmuxd2
     moonlight-qt
     jdk
+    gcc
+    readest
     protonup-qt
     readest
     gcc
