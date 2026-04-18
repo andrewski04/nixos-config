@@ -18,6 +18,7 @@
     protonup-qt
     readest
     gcc
+    ckan
   ];
 
   services.flatpak.enable = true;
