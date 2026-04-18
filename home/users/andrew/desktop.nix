@@ -35,15 +35,24 @@ in
   );
 
   home.packages = with pkgs; [
-    unstable.antigravity
+    inputs.antigravity-nix.packages.${pkgs.system}.default
     gnome-tweaks
     nodejs_24
     python315
     chromium
-    vesktop
+    unstable.discord
+    #vesktop
     gnomeExtensions.appindicator
+    #gnomeExtensions.uxplay-control
     guvcview
     pinta
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
+    unstable.gemini-cli
+    obsidian
+    claude-code
   ];
 
   dconf.enable = true;
@@ -79,6 +88,7 @@ in
       # `gnome-extensions list` for a list
       enabled-extensions = [
         "appindicatorsupport@rgcjonas.gmail.com"
+        "uxplay-control@xxanqw"
       ];
     };
   };

@@ -1,17 +1,36 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 {
 
   environment.systemPackages = with pkgs; [
     netbird-ui
     steam
+    bottles
+    libimobiledevice
+    usbmuxd2
+    moonlight-qt
+    jdk
+    gcc
+    readest
+    protonup-qt
+    readest
+    gcc
   ];
 
-  # needed for noisetorch to have microphone access
-  # programs.noisetorch.enable = true;
+  services.flatpak.enable = true;
 
-  programs.steam.extraCompatPackages = with pkgs; [
-    proton-ge-bin
-  ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession.enable = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
+  };
+  hardware.steam-hardware.enable = true;
 
   services.xserver = {
     enable = true;

@@ -25,6 +25,7 @@
     dnsutils
     age
     uv
+    unzip
   ];
 
   programs.nix-ld.enable = true;

@@ -25,6 +25,11 @@
       url = "github:Svenum/Solaar-Flake/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       sops-nix,
       authentik-nix,
       solaar,
+      antigravity-nix,
       ...
     }@inputs:
     let
@@ -54,7 +60,10 @@
         #=== HOST 2: nixos-laptop ===
         nixos-laptop = mkSystem {
           hostname = "nixos-laptop";
-          extraModules = [ ./modules/desktop/gnome.nix ];
+          extraModules = [
+            ./modules/desktop/gnome.nix
+            ./modules/desktop/virtualmachine.nix
+          ];
         };
 
         #=== HOST 3: nixos-desktop ===
@@ -62,8 +71,12 @@
           hostname = "desktop";
           extraModules = [
             ./modules/desktop/gnome.nix
+            ./modules/services/sunshine
             ./modules/hardware/nvidia.nix
             ./modules/hardware/logitech.nix
+            ./modules/core/sshd.nix
+            ./modules/desktop/game-dev.nix
+            #./modules/services/ollama
             solaar.nixosModules.default
           ];
         };

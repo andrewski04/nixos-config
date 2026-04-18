@@ -2,6 +2,10 @@
 
 {
 
+  environment.systemPackages = with pkgs; [
+    cudatoolkit
+  ];
+  
   # graphics
   hardware.graphics = {
     enable = true;
