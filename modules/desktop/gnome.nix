@@ -13,12 +13,12 @@
     usbmuxd2
     moonlight-qt
     jdk
-    gcc
     readest
     protonup-qt
     readest
     gcc
     ckan
+    cmake
   ];
 
   services.flatpak.enable = true;
@@ -60,6 +60,11 @@
   services.printing.enable = false;
 
   security.sudo.wheelNeedsPassword = false;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  };
 
   # Sound
   security.rtkit.enable = true;

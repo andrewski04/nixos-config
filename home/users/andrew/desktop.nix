@@ -40,8 +40,8 @@ in
     nodejs_24
     python315
     chromium
-    unstable.discord
-    #vesktop
+    #unstable.discord
+    unstable.vesktop
     gnomeExtensions.appindicator
     #gnomeExtensions.uxplay-control
     guvcview
