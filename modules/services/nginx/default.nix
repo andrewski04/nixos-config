@@ -11,10 +11,14 @@
   };
 
   services.nginx.streamConfig = ''
+    upstream mc_server {
+      server 10.0.5.50:25565;
+    }
+
     server {
-      # ksp (luna multiplayer)
-      listen 8800 udp;
-      proxy_pass 10.0.5.200:8800;
+     # minecraft
+     listen 25565;
+     proxy_pass mc_server;
     }
   '';
 
@@ -64,5 +68,6 @@
   networking.firewall.allowedTCPPorts = [
     80
     443
+    25565
   ];
 }
