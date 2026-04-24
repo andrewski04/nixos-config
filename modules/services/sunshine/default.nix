@@ -6,7 +6,10 @@
 }:
 {
   # fix screen wakeup: `loginctl unlock-sessions`
-  users.users.andrew.extraGroups = [ "video" "input" ];
+  users.users.andrew.extraGroups = [
+    "video"
+    "input"
+  ];
   services.sunshine = {
     enable = true;
     autoStart = true;
@@ -16,8 +19,5 @@
       cudaSupport = true;
     };
   };
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-  };
+
 }
