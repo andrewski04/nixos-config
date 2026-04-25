@@ -19,6 +19,8 @@
     gcc
     ckan
     cmake
+    gnumake
+    prismlauncher
   ];
 
   services.flatpak.enable = true;
