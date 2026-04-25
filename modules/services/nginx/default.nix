@@ -15,10 +15,20 @@
       server 10.0.5.50:25565;
     }
 
+    upstream mc2_server {
+      server 10.0.5.50:25566;
+    }
+
     server {
      # minecraft
      listen 25565;
      proxy_pass mc_server;
+    }
+
+    server {
+     # minecraft
+     listen 25566;
+     proxy_pass mc2_server;
     }
   '';
 
@@ -69,5 +79,6 @@
     80
     443
     25565
+    25566
   ];
 }
