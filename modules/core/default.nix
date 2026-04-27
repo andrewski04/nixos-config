@@ -26,6 +26,7 @@
     age
     uv
     unzip
+    zip
   ];
 
   programs.nix-ld.enable = true;

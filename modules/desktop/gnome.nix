@@ -21,6 +21,7 @@
     cmake
     gnumake
     prismlauncher
+    jetbrains.clion
   ];
 
   services.flatpak.enable = true;
