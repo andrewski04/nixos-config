@@ -9,19 +9,14 @@
     netbird-ui
     steam
     bottles
-    libimobiledevice
-    usbmuxd2
+    #libimobiledevice
+    #usbmuxd2
     moonlight-qt
-    jdk
     readest
     protonup-qt
     readest
-    gcc
     ckan
-    cmake
-    gnumake
     prismlauncher
-    jetbrains.clion
   ];
 
   services.flatpak.enable = true;

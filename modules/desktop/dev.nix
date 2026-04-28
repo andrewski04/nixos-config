@@ -14,7 +14,14 @@ in
 {
 
   environment.systemPackages = with pkgs; [
-    unstable.godot
-    unstable.aseprite
+    unstable.gemini-cli
+    cmake
+    gnumake
+    jetbrains.clion
+    go
+    gcc
+    jdk
+    github-desktop
   ];
+
 }

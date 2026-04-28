@@ -62,7 +62,8 @@
           hostname = "nixos-laptop";
           extraModules = [
             ./modules/desktop/gnome.nix
-            ./modules/desktop/virtualmachine.nix
+            #./modules/desktop/virtualmachine.nix
+            ./modules/desktop/dev.nix
           ];
         };
 
@@ -76,6 +77,7 @@
             ./modules/hardware/logitech.nix
             ./modules/core/sshd.nix
             ./modules/desktop/game-dev.nix
+            ./modules/desktop/dev.nix
             solaar.nixosModules.default
           ];
         };
