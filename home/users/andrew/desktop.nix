@@ -15,7 +15,7 @@ in
     ./base.nix
     ../../features/vscode.nix # Add GUI tools
     ../../features/librewolf.nix
-    ../../features/ghostty.nix
+    ../../features/terminal.nix
   ];
 
   # gross autostart workaround

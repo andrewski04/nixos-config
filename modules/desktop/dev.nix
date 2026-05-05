@@ -21,7 +21,9 @@ in
     go
     gcc
     jdk
+    pkg-config
     github-desktop
+    direnv
   ];
 
 }
