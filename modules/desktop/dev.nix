@@ -3,16 +3,12 @@
   config,
   inputs,
   ...
-}:
-
-let
+}: let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.system;
     config.allowUnfree = true;
   };
-in
-{
-
+in {
   environment.systemPackages = with pkgs; [
     unstable.gemini-cli
     cmake
@@ -24,6 +20,6 @@ in
     pkg-config
     github-desktop
     direnv
+    gh
   ];
-
 }

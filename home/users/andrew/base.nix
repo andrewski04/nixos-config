@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Pure CLI tools only
   home.packages = with pkgs; [
     fastfetch
@@ -18,6 +16,11 @@
       user.name = "Andrew";
       user.email = "andrew@housermail.com";
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
   };
 
   programs.vim.enable = true;
