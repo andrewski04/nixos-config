@@ -49,6 +49,7 @@
       authentik-nix,
       solaar,
       antigravity-nix,
+      nvf,
       ...
     }@inputs:
     let

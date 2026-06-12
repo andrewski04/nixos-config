@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }:
 {
@@ -17,6 +18,13 @@
     readest
     ckan
     prismlauncher
+  ];
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-color-emoji
+    corefonts
+    vista-fonts
   ];
 
   services.flatpak.enable = true;

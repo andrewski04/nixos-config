@@ -16,7 +16,7 @@
   boot.loader.grub.useOSProber = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   boot.initrd.luks.devices."luks-4f6640dc-82c0-4052-bda3-24857e2d56f0".device =
     "/dev/disk/by-uuid/4f6640dc-82c0-4052-bda3-24857e2d56f0";
