@@ -26,6 +26,7 @@
     corefonts
     vista-fonts
   ];
+  fonts.fontDir.enable = true;
 
   services.flatpak.enable = true;
 
